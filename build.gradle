@@ -7,7 +7,10 @@ plugins {
 group = 'com.blog'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
-
+jar{
+    archiveFileName = 'blog.jar'
+    enabled = false
+}
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -26,6 +29,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mockito:mockito-inline:3.11.2'
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
 
 }
 

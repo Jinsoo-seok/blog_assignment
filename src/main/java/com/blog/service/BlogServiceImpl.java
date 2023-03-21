@@ -14,6 +14,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -27,6 +28,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
+@Repository
 @RequiredArgsConstructor
 public class BlogServiceImpl implements BlogService {
 
@@ -34,17 +36,13 @@ public class BlogServiceImpl implements BlogService {
 
     final BlogRepository blogRepository;
 
-    @Value("${kakao.api.url}")
-    private String kakaoApiUrl;
-    @Value("${kakao.api.key}")
-    private String kakaoApiKey;
-    @Value("${naver.api.url}")
 
-    private String naverApiUrl;
-    @Value("${naver.client.id}")
-    private String naverClientId;
-    @Value("${naver.client.secret}")
-    private String naverClientSecret;
+    private String kakaoApiUrl = "dapi.kakao.com/v2/search/web";
+    private String kakaoApiKey = "4e666762311ae21acc5b8f6a251fcc37";
+
+    private String naverApiUrl = "openapi.naver.com/v1/search/blog.json";
+    private String naverClientId = "i3PfELVpPLKUIW3gnPiL";
+    private String naverClientSecret = "2apdVA4IBl";
 
 
     private static Integer KAKAO_LIMIT_PAGE_NUM = 50;
@@ -233,7 +231,7 @@ public class BlogServiceImpl implements BlogService {
                 headers.set("Authorization", "KakaoAK " + kakaoApiKey);
                 rtRequest = new HttpEntity<>(params, headers);
 
-                url = kakaoApiUrl + "?"
+                url = "https://" + kakaoApiUrl + "?"
                         + "query=" + param.get("keyword") + "&sort=" + param.get("pageSort")
                         + "&page=" + param.get("pageNum") + "&size=" + param.get("pageCount");
 
@@ -249,7 +247,7 @@ public class BlogServiceImpl implements BlogService {
                 headers.set("X-Naver-Client-Secret", naverClientSecret);
                 rtRequest = new HttpEntity<>(params, headers);
 
-                url = naverApiUrl + "?"
+                url = "https://" + naverApiUrl + "?"
                         + "query=" + param.get("keyword") + "&sort=" + param.get("pageSort")
                         + "&start=" + param.get("pageNum") + "&display=" + param.get("pageCount");
 

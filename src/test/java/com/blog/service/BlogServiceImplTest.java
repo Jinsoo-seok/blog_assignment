@@ -49,17 +49,12 @@ class BlogServiceImplTest {
     @Mock
     BlogRepository blogRepository;
 
-    @Value("${kakao.api.url}")
-    private String kakaoApiUrl;
-    @Value("${kakao.api.key}")
-    private String kakaoApiKey;
-    @Value("${naver.api.url}")
+    private String kakaoApiUrl = "https://dapi.kakao.com/v2/search/web";
+    private String kakaoApiKey = "https://4e666762311ae21acc5b8f6a251fcc37";
 
-    private String naverApiUrl;
-    @Value("${naver.client.id}")
-    private String naverClientId;
-    @Value("${naver.client.secret}")
-    private String naverClientSecret;
+    private String naverApiUrl = "openapi.naver.com/v1/search/blog.json";
+    private String naverClientId = "i3PfELVpPLKUIW3gnPiL";
+    private String naverClientSecret = "2apdVA4IBl";
 
     private static Integer KAKAO_LIMIT_PAGE_NUM = 50;
     private static Integer KAKAO_LIMIT_PAGE_COUNT = 50;
